@@ -7,3 +7,7 @@ class TestHelloWorld(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+# importieren des unittest Moduls und der greet Funktion aus der hello_world.py
+# Testklasse, erbt von unittest.TestCase und initialisierung einer Methode, die einen String mit dem Ausgabestring von greet überprüft
+# Testausführung starten
