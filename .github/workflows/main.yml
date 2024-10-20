@@ -1,22 +1,32 @@
+# Workflowname
 name: Python application test
-
+# ausführung bei jedem push
 on: [push]
 
 jobs:
+# job namens build, soll ausgeführt werden
   build:
+  # Betriebssystem, auf dem der Job läuft
     runs-on: ubuntu-latest
+    #Schritte von build
     steps:
+    # checkt Quellcode im Repository
     - uses: actions/checkout@v2
+    # neuste Python 3 Version
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+        #pip installieren/ aktualisieren
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        
+      # Test ausführung 
     - name: Run tests
       run: |
         python -m unittest discover
+      # ausführung hello_world.py
     - name: Run application
       run: |
         python hello_world.py
