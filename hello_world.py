@@ -1,4 +1,4 @@
-def greet(naeme):
-    return f"Hello, {naeme}!"
+def greet(name):
+    return f"Hello, {name} du Nudel!"
 
 print(greet("GitHub Actions"))
