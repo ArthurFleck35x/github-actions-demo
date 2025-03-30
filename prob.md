@@ -1,13 +1,38 @@
-# UniPlace
+# UniPlace 
 
-## INF 23 B, Semester 4
+**INF 23 B, Semester 4**  
+Prof. Dr. Alexander Auch  
+30.03.2025  
 
-## 30.03.2025
+**Dennis Pinder** (9930287)
+**Lea Liedtke** (3260935)  
+**Recep Özmen** (4302297)  
+**Sven Niggemann** (8466840)  
 
+## Einleitung
 
+Uniplace ist ein innovativer, webbasierter Marktplatz, der es Nutzern ermöglicht, Artikel anzubieten, zu suchen und zu verwalten. Die Plattform richtet sich insbesondere an Studierende und andere Nutzergruppen, die auf einfache Weise Waren und Dienstleistungen austauschen möchten. Ein zentrales Feature von Uniplace ist die Möglichkeit, als Kunde ein eigenes Konto zu erstellen, sich einzuloggen und auf alle Funktionen des Marktplatzes zuzugreifen.
 
+Die Benutzer können gezielt nach Produkten suchen und sich die Kontaktdaten der jeweiligen Anzeigenersteller direkt in der Produktbeschreibung anzeigen lassen. Zudem haben sie die Möglichkeit, eigene Artikel zum Verkauf oder Tausch anzubieten, bestehende Angebote zu bearbeiten oder zu löschen.
 
-## Frontend-Dokumentation
+Ein herausragendes Merkmal von Uniplace ist die Unterstützung von sieben verschiedenen Währungen (EUR, USD, GBP, JPY, KRW, CNY, MXN), sodass internationale Transaktionen vereinfacht werden. Durch diese Funktion wird die Plattform für eine größere Nutzerbasis attraktiv, insbesondere für Personen, die grenzüberschreitend handeln oder in unterschiedlichen Währungen bezahlen möchten.
+
+Neben den grundlegenden Marktplatzfunktionen setzt Uniplace auf eine benutzerfreundliche Oberfläche und ein intuitives Design, um eine nahtlose User Experience zu gewährleisten. Die Plattform bietet zudem Mechanismen zur Sicherstellung von Datenschutz und Sicherheit der Nutzerinformationen.
+
+Im Rahmen dieses Projekts wurden verschiedene technische Aspekte realisiert, darunter die Einrichtung der Datenbank, die Integration externer APIs und die Automatisierung von Wechselkurs-Updates. Diese Dokumentation beschreibt die einzelnen Schritte der Entwicklung und Implementierung der zentralen Funktionen von Uniplace.
+
+## Projektorganisation
+|Dennis Pinder|Lea Liedtke|Recep Özmen|Sven Niggemann|
+|||||||
+|||||||
+
+## Systemarchitektur
+
+## Backend & API
+
+## Datenbank 
+
+## Frontend
 
 ### Übersicht
 
@@ -60,15 +85,6 @@ UniPlace verwendet ein konsistentes Designsystem mit:
   width: 100%;
   padding: 1rem;
 }
-
-/* Titel mit Farbverlauf */
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  background: linear-gradient(to right, #22d3ee, #9333ea);
-  -webkit-background-clip: text;
-  color: transparent;
-}
 ```
 
 ### Kernfunktionen und Implementierungsbeispiele
@@ -106,106 +122,4 @@ function getDetails(product){
 </div>
 ```
 
-#### 3. Währungsumrechnung (Currency.vue)
 
-```javascript
-async function updateCurrencyRate() {
-    try {
-        if (selectedCurrency.value !== "eur") {
-            const currencyRate = await fetchCurrencyRate(selectedCurrency.value);
-            setCurrencyRate(currencyRate);
-        } else {
-            setCurrencyRate(1);
-        }
-    } catch (error) {
-        console.error("Fehler beim Laden der Währungsdaten:", error);
-    }
-}
-```
-
-#### 4. Produkte verwalten (MyArticlesView.vue)
-
-```javascript
-const deleteProduct = (id) => {
-    products.value = products.value.filter(product => product.id !== id);
-    deleteArticle(id);
-    closePopup();
-};
-```
-
-### Responsive Design
-
-Das Frontend ist vollständig responsiv gestaltet:
-
-```css
-/* Beispiel aus AboutUs.vue */
-.section div {
-    padding: 1rem;
-    text-align: center;
-}
-
-/* Beispiel aus Currency.vue */
-.flag-image {
-    width: 40%;
-    height: auto;
-    display: block;
-    margin: 1rem auto;
-}
-```
-
-### Popup-Benachrichtigungen
-
-Für Benutzerrückmeldungen werden temporäre Popup-Nachrichten verwendet:
-
-```javascript
-function openPopup(){
-  isPopupVisible.value = true;
-  
-  setTimeout(() => {
-    isPopupVisible.value = false;
-  }, 2000);
-};
-```
-
-```css
-.popup {
-  margin-top: 70px;
-  margin-left: 45%;
-  width: 10%;
-  height: auto;
-  position: fixed;
-  border-radius: 10px;
-  z-index: 400;
-  text-align: center;
-}
-
-.errorMessage {
-  color: red;
-  text-align: center;
-}
-
-.successMessage {
-  color: lightgreen;
-  text-align: center;
-}
-```
-
-### API-Integration
-
-Alle Backend-Operationen werden über die REST.js-Bibliothek abgewickelt:
-
-```javascript
-// Beispiel aus AddArticleView.vue
-const submitArticle = () => {
-    if(checkProductForm()){
-        successmessage.value = "Articlecreation was a success"
-        isSuccessVisible.value = true
-
-        setTimeout(() => {
-            isSuccessVisible.value = false;
-        }, 2000);
-
-        createNewArticle(productForm.value.title, price, productForm.value.count, productForm.value.description);
-    }
-}
-```
